@@ -1,0 +1,42 @@
+
+# multiple non linear equations
+# the equations to be solved are:
+# 2x^2-y^2 = 0
+# y - 0.5*(sin(x)+cos(x)) = 0
+# I need to find the value of x, and y that would satisfy the equations above.
+# I would use Newton raphson method as an iterative method to iterate within predefined maximum number of iterations till the solution 
+
+
+def res(x): # main functions matrix
+    n = x.size
+    f = np.zeros(n, dtype=np.float64)
+    f[0] = 2 * x[0] ** 2 - x[1] ** 2
+    f[1] = x[1] - 0.5 * (math.sin(x[0]) + math.cos(x[1]))
+    return f
+
+
+def jac(x): # derivative functions matrix (Jacobian matrix)
+    n = x.size
+    j = np.zeros((n, n), dtype=np.float64)
+    j[0, 0] = 4 * x[0]
+    j[0, 1] = -2 * x[1]
+    j[1, 0] = -0.5 * math.cos(x[0])
+    j[1, 1] = 1.0 + 0.5 * math.sin(x[1])
+    return j
+
+
+x = np.array([1.0, 1.0])  # initial point
+tol = 1.0e-06  # tolerance
+max_iter = 20  # maximum number of iteration
+for i in range(max_iter):
+    f = res(x)
+    j = jac(x)
+    print("Iteration ", i, "has a norm of", nl.norm(f, 2))
+    if (nl.norm(f, 2) < tol):
+        print("converged in ", i, "iterations to ", x)
+        break
+    else:
+        dx = nl.solve(j, f)
+        x = x - dx
+if (i == max_iter):
+    print("failed to converge in", max_iter, "Iterations")
