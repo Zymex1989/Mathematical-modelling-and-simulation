@@ -1,7 +1,8 @@
 # non linear single algebraic equation
 # the equation to be solved is:
 # sin(x) - x^2 = 0
-# we need to find the value of x that would satisfy the equation above
+# I need to find the value of x that would satisfy the equation above
+# I would use Newton Raphson mehod as an iteartvie method to iterate within pre-defined maximum number of iterations till the solution
 
 import numpy as np
 import numpy.linalg as nl
