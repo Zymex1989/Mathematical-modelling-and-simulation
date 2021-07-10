@@ -1,0 +1,23 @@
+# Linear equations solution:
+# The equations to be solved are:
+# -250*T1+40*T3=-6500
+# 240*T1-250*T2=-2500
+# 240*T2-250*T3=-2500
+
+# using numpy:
+import numpy as np
+import numpy.linalg as nl
+A = np.array([[-250,0,40],[240,-250,0],[0,240,-250]])
+B = np.array([-6500,-2500,-2500])
+X = nl.solve(A,B)
+print(X)
+
+# using Sympy
+import sympy as sp
+T1,T2,T3 = sp.symbols('T1,T2,T3')
+eq1 = -250*T1+40*T3+6500
+eq2 = 240*T1-250*T2+2500
+eq3 = 240*T2-250*T3+2500
+X = sp.solve([eq1,eq2,eq3],[T1,T2,T3])
+print(X)
+
